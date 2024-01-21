@@ -1,0 +1,78 @@
+<template>
+  <div>
+   <!-- Section: Design Block -->
+<section class="text-center">
+  <!-- Background image -->
+  <div class="p-5 bg-image" style="
+        background-image: url('https://mdbootstrap.com/img/new/textures/full/171.jpg');
+        height: 300px;
+        "></div>
+  <!-- Background image -->
+
+  <div class="card mx-4 mx-md-5 shadow-5-strong" style="
+        margin-top: -100px;
+        background: hsla(0, 0%, 100%, 0.8);
+        backdrop-filter: blur(30px);
+        ">
+    <div class="card-body py-5 px-md-5">
+
+      <div class="row d-flex justify-content-center">
+        <div class="col-lg-8">
+          <h2 class="fw-bold mb-5">Login up now</h2>
+          <form @submit.prevent="loginUser()">
+            <!-- 2 column grid layout with text inputs for the first and last names -->
+          
+            <div class="form-outline mb-4">
+              <input type="text" id="username" v-model="form.username" class="form-control" />
+              <label class="form-label" for="form3Example3">User Name</label>
+            </div>
+           
+            
+      
+            <!-- Password input -->
+            <div class="form-outline mb-4">
+              <input type="password" id="password" v-model="form.password" class="form-control" />
+              <label class="form-label" for="form3Example4">Password</label>
+            </div>
+
+         
+            <button type="submit" class="btn btn-primary btn-block mb-4">
+              Login up
+            </button>
+
+            <!-- Register buttons -->
+            <div class="text-center">
+              <span>or sign up with: </span>
+             <span>Register</span>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- Section: Design Block -->
+  </div>
+</template>
+<script>
+export default{
+  name:'LoginForm',
+  data(){
+     return{
+      form:{
+        username:'',
+        password:'',
+      }
+     }
+  },
+  methods:{
+    async loginUser(){
+     var response = await this.axios.post('auth/login',this.form);
+     localStorage.setItem('token',response.data.token);
+     this.$router.push('/');
+    }
+  }
+}
+</script>
+<style scoped>
+</style>
